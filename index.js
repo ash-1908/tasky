@@ -1,9 +1,12 @@
 // Array to store all the task data
 let globalStore = [];
 
+// Card Container div
+const cardContainer = document.querySelector(".card__container");
+
 // Local Storage
 const updateLocalStorage = () =>
-  localStorage.setItem("tasky", JSON.stringify({ tasks: globalStore }));
+  localStorage.setItem("tasky", JSON.stringify({tasks: globalStore}));
 
 // Function to calculate time
 const calcTime = () => {
@@ -26,8 +29,9 @@ const calcTime = () => {
   let AM = "AM";
   if(hour > 12){ AM = "PM"; hour = hour - 12;}
   let min = dateObj.getMinutes();
+  if(min < 10) min = "0" + min;
   
-  const currTime = day + " " + date + "/" + month + "/" + year + " " + hour + ":" + min + AM;
+  const currTime = day + " " + date + "/" + month + "/" + year + " " + hour + ":" + min +" " + AM;
 
   return currTime;
 };
@@ -138,4 +142,17 @@ const taskCard = ({ id, imageUrl, title, type, desc, updated }) => `
         </div>`;
 
 // To render Task-Cards on load/reload
-const loadTaskCards = () => {};
+const loadTaskCards = () => {
+  // get data from local storage
+  const taskData = localStorage.tasky;
+  // return if no data in local storage
+  if(!taskData) return;
+  // get data from tasks key 
+  const {tasks} = JSON.parse(taskData);
+
+  tasks.map((task) => {
+    const card = taskCard(task);
+    cardContainer.insertAdjacentHTML("beforeend", card);
+    globalStore.push(task);
+  });
+}
