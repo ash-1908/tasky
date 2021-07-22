@@ -23,19 +23,11 @@ const calcTime = () => {
   let year = dateObj.getFullYear();
   // get time
   let hour = dateObj.getHours();
-  let AM = true;
-  if(hour > 12){ AM = false; hour = hour - 12;}
+  let AM = "AM";
+  if(hour > 12){ AM = "PM"; hour = hour - 12;}
   let min = dateObj.getMinutes();
   
-  const currTime = {
-    day: day,
-    date: date,
-    month: month,
-    year: year,
-    hour: hour,
-    min: min,
-    AM: AM,
-  };
+  const currTime = day + " " + date + "/" + month + "/" + year + " " + hour + ":" + min + AM;
 
   return currTime;
 };
@@ -100,6 +92,7 @@ const saveNewTask = () => {
     title: document.getElementById("title").value,
     type: document.getElementById("badge").value,
     desc: document.getElementById("desc").value,
+    updated: calcTime(),
   };
 
   // checking data for null values
