@@ -1,0 +1,16 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',
+    sans-serif;
+}
+
+.heading{
+    font-weight: 400;
+}
+
+p{
+    font-weight: 200;
+    font-size: 18px;
+}
