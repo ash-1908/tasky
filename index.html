@@ -38,48 +38,7 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form class="container d-flex flex-column gap-4">
-              <div>
-                <label class="form-label" for="imageUrl" name="imageUrl">Image URL</label>
-                <input class="form-control" type="url" id="imageUrl" name="imageUrl" placeholder="https://www.example.com/imagelink" />
-              </div>
-              <div>
-                <label class="form-label" for="title" name="title">Task Title</label>
-                <input class="form-control" type="text" id="title" name="title" placeholder="Title" />
-              </div>
-              <div>
-                <label class="form-label" for="badge" name="badge">Task Type</label>
-                <input class="form-control" type="text" id="badge" name="badge" placeholder="Type" />
-              </div>
-              <div>
-                <label class="form-label" for="desc" name="desc">Task Description</label>
-                <textarea style="height: 130px;" class="form-control" type="text" id="desc" name="desc" placeholder="Description"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
+      <div class="modal-dialog modal__container">
       </div>
     </div>
     <!-- Navabr -->
@@ -110,7 +69,7 @@
             </li>
           </ul>
 
-          <h6><button class="btn btn-outline-success addRad" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-plus"></i>Add Item</button></h6>
+          <h6><button class="btn btn-outline-success addRad" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addItem()"><i class="bi bi-plus"></i>Add Item</button></h6>
         </div>
       </div>
     </nav>
