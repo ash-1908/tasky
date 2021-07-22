@@ -41,7 +41,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
             <button
               type="button"
               class="btn-close"
@@ -49,7 +49,26 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">
+            <form class="container d-flex flex-column gap-4">
+              <div>
+                <label class="form-label" for="imageUrl" name="imageUrl">Image URL</label>
+                <input class="form-control" type="url" id="imageUrl" name="imageUrl" placeholder="https://www.example.com/imagelink" />
+              </div>
+              <div>
+                <label class="form-label" for="title" name="title">Task Title</label>
+                <input class="form-control" type="text" id="title" name="title" placeholder="Title" />
+              </div>
+              <div>
+                <label class="form-label" for="badge" name="badge">Task Type</label>
+                <input class="form-control" type="text" id="badge" name="badge" placeholder="Type" />
+              </div>
+              <div>
+                <label class="form-label" for="desc" name="desc">Task Description</label>
+                <textarea style="height: 130px;" class="form-control" type="text" id="desc" name="desc" placeholder="Description"></textarea>
+              </div>
+            </form>
+          </div>
           <div class="modal-footer">
             <button
               type="button"
@@ -69,7 +88,7 @@
       style="background-color: #e3f2fd"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" style="color: #0d6efd" href="#">Tasky</a>
+        <a class="navbar-brand" style="color: #0d6efd" href="./index.html">Tasky</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -84,14 +103,14 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="./about.html">About</a>
             </li>
           </ul>
 
-          <h6><button class="btn btn-outline-success addRad"><i class="bi bi-plus"></i>Add Item</button></h6>
+          <h6><button class="btn btn-outline-success addRad" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-plus"></i>Add Item</button></h6>
         </div>
       </div>
     </nav>
@@ -144,29 +163,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card">
-            <div class="card-header d-flex gap-2 justify-content-end">
-              <button type="button" class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
-              <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
-            </div>
-            <div class="card-body">
-              <img src="https://www.bing.com/th?id=OIP.6nCVjA0S936UiBlDUsov4QAAAA&w=154&h=103&c=8&rs=1&qlt=90&o=6&dpr=1.25&pid=3.1&rm=2" class="card-img-top" alt="..." />
-              <h5 class="card-title mt-3">Card title</h5>
-              <p class="card-text text-truncate">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p class="card-text">
-                <small class="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-            <div class="card-footer">
-              <button type="button" class="btn btn-outline-success float-end">Primary</button>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
     <!-- JavaScript Bundle with Popper -->
@@ -175,5 +172,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <!-- JS File -->
+    <script src="./index.js"></script>
   </body>
 </html>
