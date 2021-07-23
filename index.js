@@ -115,18 +115,21 @@ const saveNewTask = () => {
 
   // add to local storage
   updateLocalStorage();
+
+  // load task-cards
+  loadTaskCards();
 };
 
 // Function to create a Task-Card using data from local storage
 const taskCard = ({ id, imageUrl, title, type, desc, updated }) => `
-<div class="col-12 col-md-6 col-lg-4">
+<div class="col-12 col-md-6 col-lg-4 pb-3">
           <div class="card">
             <div class="card-header d-flex gap-2 justify-content-end">
               <button type="button" id=${id} class="btn btn-outline-primary addRad"><i class="bi bi-pencil"></i></button>
               <button type="button" id=${id} class="btn btn-outline-danger addRad"><i class="bi bi-trash"></i></button>
             </div>
             <div class="card-body">
-              <img src=${imageUrl} class="card-img-top" alt="${title} Image" />
+              <img src=${imageUrl} class="card-img-top" alt="${title} Image" style="width: 100%; height: 200px;" />
               <h5 class="card-title mt-3">${title}</h5>
               <p class="card-text text-truncate">
                 ${desc}
@@ -142,17 +145,18 @@ const taskCard = ({ id, imageUrl, title, type, desc, updated }) => `
         </div>`;
 
 // To render Task-Cards on load/reload
-const loadTaskCards = () => {
+const loadInitialTaskCards = () => {
   // get data from local storage
   const taskData = localStorage.tasky;
   // return if no data in local storage
   if(!taskData) return;
   // get data from tasks key 
   const {tasks} = JSON.parse(taskData);
+  // store the data in global store
+  globalStore = tasks;
 
   tasks.map((task) => {
     const card = taskCard(task);
     cardContainer.insertAdjacentHTML("beforeend", card);
-    globalStore.push(task);
   });
 }
