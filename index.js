@@ -116,8 +116,9 @@ const saveNewTask = () => {
   // add to local storage
   updateLocalStorage();
 
-  // load task-cards
-  loadTaskCards();
+  // load task-card
+  const newCard = taskCard(newTask);
+  cardContainer.insertAdjacentHTML("beforeend", newCard);
 };
 
 // Function to create a Task-Card using data from local storage
@@ -129,12 +130,12 @@ const taskCard = ({ id, imageUrl, title, type, desc, updated }) => `
               <button type="button" id=${id} class="btn btn-outline-danger addRad"><i class="bi bi-trash"></i></button>
             </div>
             <div class="card-body">
-              <img src=${imageUrl} class="card-img-top" alt="${title} Image" style="width: 100%; height: 200px;" />
+              <img src=${imageUrl} class="card-img-top" alt="${title} image" style="width: 100%; height: 200px;" />
               <h5 class="card-title mt-3">${title}</h5>
               <p class="card-text text-truncate">
                 ${desc}
               </p>
-              <p class="card-text">
+              <p class="card-text fs-6 fw-light">
                 <small class="text-muted" id="lastUpdate">Last Updated: ${updated}</small>
               </p>
             </div>
