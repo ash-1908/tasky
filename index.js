@@ -161,3 +161,23 @@ const loadInitialTaskCards = () => {
     cardContainer.insertAdjacentHTML("beforeend", card);
   });
 }
+
+// Search bar functionality
+const search = () => {
+  // get id
+  const toSearch = document.getElementById("searchBar").value;
+
+  // find the query in global store
+  const result = globalStore.filter((task) => task.title.includes(toSearch));
+
+  // load the cards from task
+  const cards = result.map((task) => taskCard(task));
+
+  // remove all task-cards
+  while(cardContainer.firstChild){
+    cardContainer.removeChild(cardContainer.firstChild);
+  }
+
+  // load the result tasks
+  cards.map((card) => cardContainer.insertAdjacentHTML("beforeend", card));
+};

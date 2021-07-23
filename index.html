@@ -80,13 +80,15 @@
           <div class="input-group">
             <input
               type="text"
+              id="searchBar"
               class="form-control"
               placeholder="Search for Task"
               aria-label="Search for Task"
               aria-describedby="button-addon2"
+              onkeyup="search()"
             />
             <button
-              class="btn btn-outline-secondary"
+              class="btn btn-outline-secondary disabled fw-bold"
               type="button"
               id="button-addon2"
             >
