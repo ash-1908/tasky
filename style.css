@@ -25,3 +25,15 @@ p{
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+@media (min-width: 767px){
+.md_flex > div{
+    width: 50%;
+}
+
+.md_flex{
+    display: flex;
+}
+
+}
+
