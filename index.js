@@ -59,10 +59,10 @@ const openTaskModal = ({ imageUrl, title, type, desc, updated }) => `
     <h4 class="modal-title" id="exampleModalLabel">${title}</h4>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
-  <div class="card border-0">
-    <div>
-      <div style="width: 100%; height: 350px;">
-        <img src=${imageUrl} alt="${imageUrl} Poster" class="w-100 h-100" />
+  <div class="modal-body border-0">
+   
+      <div style="width: 100%; height: 350px; margin-bottom: 5px;">
+        <img src=${imageUrl} alt="${imageUrl} Poster" class="w-100 h-100 rounded" />
       </div>
       <div class="p-2">
         <p class="text__clamp fw-normal">
@@ -77,7 +77,7 @@ const openTaskModal = ({ imageUrl, title, type, desc, updated }) => `
           Last Updated: ${updated} 
         </small>
       </p>
-    </div>
+   
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -88,41 +88,45 @@ const openTaskModal = ({ imageUrl, title, type, desc, updated }) => `
 `;
 
 // Edit-Task Modal
-const editTaskModal = ({ id, imageUrl, title, type, desc, updated }) => `
+const editTaskModal = ({ id, imageUrl, title, type, desc }) => `
 <div class="modal-content">
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+    <h4 class="modal-title" id="exampleModalLabel">${title}</h4>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body border-0">
+    <div style="width: 100%; height: 100%; margin-bottom: 10px;">
+      <img src=${imageUrl} alt="${imageUrl} Poster" class="w-100 h-100 rounded" />
+    </div>
     <form class="container d-flex flex-column gap-4">
       <div>
         <label class="form-label" for="imageUrl" name="imageUrl">Image URL</label>
-        <input class="form-control" type="url" id="imageUrl" name="imageUrl" placeholder="https://www.example.com/imagelink" />
+        <input class="form-control" type="url" id="imageUrl" name="imageUrl" value=${imageUrl} />
       </div>
       <div>
         <label class="form-label" for="title" name="title">Task Title</label>
-        <input class="form-control" type="text" id="title" name="title" placeholder="Title" />
+        <input class="form-control" type="text" id="title" name="title" value=${title} />
       </div>
       <div>
         <label class="form-label" for="badge" name="badge">Task Type</label>
-        <input class="form-control" type="text" id="badge" name="badge" placeholder="Type" />
+        <input class="form-control" type="text" id="badge" name="badge" value=${type} />
       </div>
       <div>
         <label class="form-label" for="desc" name="desc">Task Description</label>
-        <textarea style="height: 130px;" class="form-control" type="text" id="desc" name="desc" placeholder="Description"></textarea>
+        <textarea style="height: 130px;" class="form-control" type="text" id="desc" name="desc">${desc}</textarea>
       </div>
     </form>
   </div>
   <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id=${id} onclick="saveEdit.apply(this, arguments)">
+      Save
+    </button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
       Close
     </button>
-    <button type="button" class="btn btn-primary" onclick="saveNewTask()" data-bs-dismiss="modal">
-      Save changes
-    </button>
   </div>
-</div>`;
+</div>
+`;
 
 //        FUNCTIONS
 
@@ -214,8 +218,8 @@ const taskCard = ({ id, imageUrl, title, type, desc, updated }) => `
   <div class="card">
     
     <div class="card-header d-flex gap-2 justify-content-end">
-      <button type="button" id=${id} class="btn btn-outline-primary addRad">
-        <i class="bi bi-pencil"></i>
+      <button type="button" id=${id} class="btn btn-outline-primary addRad" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editTask.apply(this, arguments)">
+        <i class="bi bi-pencil" id=${id} data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editTask.apply(this, arguments)"></i>
       </button>
       <button type="button" id=${id} class="btn btn-outline-danger addRad">
         <i class="bi bi-trash"></i>
@@ -225,7 +229,7 @@ const taskCard = ({ id, imageUrl, title, type, desc, updated }) => `
     <div class="card-body">
       
         <div style="width: 100%; height: 250px;">
-          <img src=${imageUrl} alt="${title} Cover" class="w-100 h-100" />
+          <img src=${imageUrl} alt="${title} Cover" class="w-100 h-100 rounded" />
         </div>
         <h1 class="p-2">${title}</h1>
         <div class="p-2">
@@ -299,4 +303,69 @@ const openTask = (event) => {
 
   // call the modal with these details
   modalContainer.innerHTML = openTaskModal(getCardDetails[0]);
+};
+
+// Edit-Task Modal
+const editTask = (event) => {
+  // find the card clicked
+  event = window.event;
+  const targetID = event.target.id;
+
+  // get the card details
+  let data = globalStore.filter((data) => data.id === targetID);
+
+  // give a modal
+  modalContainer.innerHTML = editTaskModal(data[0]);
+};
+
+// Save edited task
+const saveEdit = (event) => {
+  event = window.event;
+  const targetID = event.target.id;
+
+  // get edited details
+  
+    const imageUrl= document.getElementById("imageUrl").value;
+    const title= document.getElementById("title").value;
+    const type= document.getElementById("badge").value;
+    const desc= document.getElementById("desc").value;
+    const updated= calcTime();
+  
+
+  // get original details
+  let originalTask = globalStore.filter((data) => data.id === targetID);
+  originalTask = originalTask[0];
+
+  // checking null values
+  if(imageUrl !== "") originalTask.imageUrl = imageUrl;
+  if(title !== "") originalTask.title = title;
+  if(type !== "") originalTask.type = type;
+  if(desc !== "") originalTask.desc = desc;
+  originalTask.updated = updated;
+
+  // push changes to global store
+  globalStore = globalStore.map((data) => {
+        if(data.id === targetID){
+            return {
+                id: data.id,
+                imageUrl: originalTask.imageUrl,
+                title: originalTask.title,
+                type: originalTask.type,
+                desc: originalTask.desc,
+                updated: originalTask.updated,
+            };
+        }
+        return data;
+  });
+
+  // update the local storage
+  updateLocalStorage();
+
+  // remove all the cards from dom
+  while(cardContainer.firstChild){
+    cardContainer.removeChild(cardContainer.firstChild);
+  }  
+
+  // reload cards
+  loadInitialTaskCards();
 };
