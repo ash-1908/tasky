@@ -101,15 +101,15 @@ const editTaskModal = ({ id, imageUrl, title, type, desc }) => `
     <form class="container d-flex flex-column gap-4">
       <div>
         <label class="form-label" for="imageUrl" name="imageUrl">Image URL</label>
-        <input class="form-control" type="url" id="imageUrl" name="imageUrl" value=${imageUrl} />
+        <input class="form-control" type="url" id="imageUrl" name="imageUrl" value="${imageUrl}" />
       </div>
       <div>
         <label class="form-label" for="title" name="title">Task Title</label>
-        <input class="form-control" type="text" id="title" name="title" value=${title} />
+        <input class="form-control" type="text" id="title" name="title" value="${title}" />
       </div>
       <div>
         <label class="form-label" for="badge" name="badge">Task Type</label>
-        <input class="form-control" type="text" id="badge" name="badge" value=${type} />
+        <input class="form-control" type="text" id="badge" name="badge" value="${type}" />
       </div>
       <div>
         <label class="form-label" for="desc" name="desc">Task Description</label>
