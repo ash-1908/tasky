@@ -279,7 +279,7 @@ const search = () => {
   const toSearch = document.getElementById("searchBar").value;
 
   // find the query in global store
-  const result = globalStore.filter((task) => task.title.includes(toSearch));
+  const result = globalStore.filter(({title}) => title.includes(toSearch));
 
   // load the cards from task
   const cards = result.map((task) => taskCard(task));
