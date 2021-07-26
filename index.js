@@ -221,8 +221,8 @@ const taskCard = ({ id, imageUrl, title, type, desc, updated }) => `
       <button type="button" id=${id} class="btn btn-outline-primary addRad" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editTask.apply(this, arguments)">
         <i class="bi bi-pencil" id=${id} data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editTask.apply(this, arguments)"></i>
       </button>
-      <button type="button" id=${id} class="btn btn-outline-danger addRad">
-        <i class="bi bi-trash"></i>
+      <button type="button" id=${id} class="btn btn-outline-danger addRad" onclick="deleteCard.apply(this, arguments)">
+        <i class="bi bi-trash" id=${id} onclick="deleteCard.apply(this, arguments)"></i>
       </button>
     </div>
             
@@ -368,4 +368,23 @@ const saveEdit = (event) => {
 
   // reload cards
   loadInitialTaskCards();
+};
+
+// Delete task-card functionality
+const deleteCard = (event) => {
+  // find the card
+  event = window.event;
+  const targetID = event.target.id;
+  const tagname = event.target.tagName;
+
+  // remove from local storage
+  globalStore = globalStore.filter((data) => data.id !== targetID);
+  updateLocalStorage();
+
+  // remove from dom
+  if(tagname === "BUTTON")
+    return cardContainer.removeChild(event.target.parentNode.parentNode.parentNode);
+  else
+    return cardContainer.removeChild(event.target.parentNode.parentNode.parentNode.parentNode);
+
 };
